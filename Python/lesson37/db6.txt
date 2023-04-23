@@ -1,0 +1,120 @@
+1.	Сосчитать количество клиентов, покупающих товар.
+SELECT COUNT(DISTINCT Client)
+FROM Client
+
+2.	Сколько посредников поставляют товар для фирмы.
+SELECT COUNT(DISTINCT Seller)
+FROM Seller
+WHERE Seller.status = 'посредник'
+
+3.	Вывести среднюю сумму сделки по проданному товару.
+SELECT ROUND(AVG(CostUnit*Count), 2)
+FROM SallerGoods
+
+4.	Посчитать на какую сумму было всего поставлено товара.
+SELECT ROUND(SUM(CostUnit*Count), 2)
+FROM SallerGoods
+
+5.	Определите максимальное количество закупленного товара шт.(кг)
+SELECT MAX(Count)
+FROM SallerGoods
+
+6.	Какая минимальная сумма покупки, на которую клиент сделал заказ.
+SELECT MIN(cg.CostUnit*cg.Count)
+FROM ClientGoods cg, Client c
+WHERE cg.INNClient = c.INNClient
+
+7.	Посчитать на какую сумму было продано товара магазинам.
+SELECT SUM(cg.CostUnit*cg.Count)
+FROM ClientGoods cg, Client c
+WHERE c.INNClient = cg.INNClient AND c.status = 'магазин'
+
+8.	Сосчитать общее количество видов закупленных фирмой вафель.
+SELECT COUNT(DISTINCT sg.Goods)
+FROM SallerGoods sg
+WHERE sg.Goods LIKE '%Вафли%'
+
+9.	Выведите среднюю цену на растительное масло (закупочную).
+SELECT AVG(sg.CostUnit)
+FROM SallerGoods sg
+WHERE sg.Goods LIKE '%масло%'
+
+10.	Определите сколько всего было продано килограмм яблок.
+SELECT SUM(sg.Count)
+FROM SallerGoods sg
+WHERE sg.Goods LIKE '%Яблоки%'
+
+11.	Определите какое количество картофеля закупили кафе.
+SELECT SUM(sg.Count)
+FROM SallerGoods sg, Client c, ClientGoods cg
+WHERE sg.Goods LIKE '%Картофель%' AND c.Status = 'кафе' AND c.INNClient = cg.INNClient AND cg.ID = sg.ID
+
+12.	Посчитать сколько клиентов купили перец черный молотый.
+SELECT COUNT(DISTINCT c.Client)
+FROM SallerGoods sg, Client c, ClientGoods cg
+WHERE sg.Goods LIKE '%Перец черный молотый%' AND c.INNClient = cg.INNClient AND cg.ID = sg.ID
+
+13.	Определить сколько наименований товара было куплено у посредников.
+SELECT COUNT(DISTINCT sg.Goods)
+FROM SallerGoods sg, Seller s
+WHERE s.Status = 'посредник' AND s.INNSeller = sg.INNSeller
+
+14.	Определить минимальную цену за единицу проданного товара.
+SELECT MIN(sg.CostUnit)
+FROM SallerGoods sg
+
+15.	Определите минимальную сумму на какую было закуплено товара.
+SELECT MIN(sg.CostUnit*sg.Count)
+FROM SallerGoods sg
+
+16.	Определить максимальную сумму за товар, проданный магазинам.
+SELECT MAX(cg.CostUnit*cg.Count)
+FROM ClientGoods cg, Client c
+WHERE c.Status = 'магазин' AND c.INNClient = cg.INNClient
+
+17.	Определить со сколькими фирмами сотрудничает данная фирма.
+SELECT COUNT(DISTINCT s.Seller)
+FROM Seller s
+
+18.	Определить минимальную сумму сделки по закупке товара у производителей.
+SELECT MIN(sg.CostUnit*sg.Count)
+FROM SallerGoods sg, Seller s
+WHERE s.Status = 'производитель' AND s.INNSeller = sg.INNSeller
+
+19.	Определить среднюю цену за пачку чая при покупке.
+SELECT AVG(sg.CostUnit)
+FROM SallerGoods sg
+WHERE sg.Goods LIKE '%Чай%'
+
+20.	Определите максимальную сумму прибыли за товар, проданный посреднику.
+SELECT MAX((cg.CostUnit*sg.Count)-(sg.CostUnit*sg.Count))
+FROM ClientGoods cg, SallerGoods sg, Client c
+WHERE sg.ID = cg.ID AND cg.INNClient = c.INNClient AND c.Status = 'посредник'
+
+21.	 Определите минимальную прибыль за товар, купленный у посредника.
+SELECT MIN((cg.CostUnit*sg.Count)-(sg.CostUnit*sg.Count))
+FROM ClientGoods cg, SallerGoods sg, Seller s
+WHERE sg.ID = cg.ID AND sg.INNSeller = s.INNSeller AND s.Status = 'посредник'
+
+22.	 Какое количество наименований товара куплено у фирмы.
+SELECT COUNT(DISTINCT sg.Goods)
+FROM SallerGoods sg
+
+23.	 Сколько в продаже видов печенья.
+SELECT COUNT(DISTINCT sg.Goods)
+FROM SallerGoods sg
+WHERE sg.Goods LIKE '%Печенье%'
+
+24.	 Какая максимальная сумма покупки, на которую клиент сделал заказ.
+SELECT MAX(cg.CostUnit*cg.Count)
+FROM ClientGoods cg
+
+25.	 Определите среднюю прибыль от перепродажи масла.
+SELECT AVG((cg.CostUnit*sg.Count)-(sg.CostUnit*sg.Count))
+FROM ClientGoods cg, SallerGoods sg
+WHERE sg.ID = cg.ID AND Goods LIKE '%масло%'
+
+26.	 Со сколькими посредниками сотрудничает фирма.
+SELECT COUNT(DISTINCT c.Client)
+FROM Client c
+WHERE c.Status = 'посредник'
