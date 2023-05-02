@@ -1,0 +1,172 @@
+1.	Выведите список студентов физико-математического факультета.
+SELECT FIO
+FROM Student
+WHERE "Group" IN
+    (SELECT "Group"
+    FROM G
+    WHERE Kafedra IN
+        (SELECT Kafedra
+        FROM Kafedra
+        WHERE Decanat LIKE 'Физико-математический'))
+
+2.	Студенты какой кафедры и факультета сдавали социологию.
+SELECT Kafedra, Decanat
+FROM Kafedra
+WHERE Kafedra IN
+    (SELECT Kafedra
+    FROM G
+    WHERE [Group] IN
+        (SELECT [Group]
+        FROM Student
+        WHERE ID_st IN
+        (SELECT ID_St
+        FROM Exzamen
+        WHERE Predmet='Социология')))
+
+3.	Выведите кафедры, список студентов, список студентов в алфавитном порядке.
+SELECT s.FIO,
+    (SELECT g.Kafedra
+    FROM G g
+    WHERE s."Group"=g."Group"
+    ) AS [Кафедра]
+FROM Student s
+ORDER BY s.FIO
+
+4.	Вывести номера зачеток только студентов физико-технического факультета.
+SELECT N_Z
+FROM Zachetki
+WHERE Id_Studenta IN
+    (SELECT ID_St
+    FROM Student
+    WHERE [Group] IN
+        (SELECT [Group]
+        FROM G
+        WHERE Kafedra IN
+            (SELECT Kafedra
+            FROM Kafedra
+            WHERE Decanat = 'Физико-технический'
+            )
+        )
+    )
+
+5.	Выведите студентов физико-технического факультета сдавших иностранный язык на 5.
+SELECT FIO
+FROM Student
+WHERE ID_St IN
+    (SELECT Id_St
+    FROM Exzamen
+    WHERE Predmet LIKE 'Иностр. язык' AND Ball LIKE '5')
+        AND [Group] IN
+            (SELECT [Group]
+            FROM G
+            WHERE Kafedra IN
+                (SELECT Kafedra
+                FROM Kafedra
+                WHERE Decanat LIKE "Физико-технический")
+    )
+
+6.	Подсчитать сколько различных предметов сдавалось в сессию.
+SELECT DISTINCT Predmet
+FROM Exzamen
+
+7.	Напишите запрос, который выводит средний балл по экзаменам Васильевой.
+SELECT AVG(Ball)
+FROM Exzamen
+WHERE Id_St IN
+    (SELECT ID_St
+    FROM Student
+    WHERE FIO LIKE 'Васильева%'
+    )
+
+8.	Определите сколько человек учится на каждой специальности.
+SELECT Count(FIO), Special
+FROM Student
+GROUP BY Special
+
+9.	Напишите запрос, который покажет все группы физико-технического факультета.
+SELECT [Group]
+FROM G
+WHERE Kafedra IN
+    (SELECT Kafedra
+    FROM Kafedra
+    WHERE Decanat = 'Физико-технический'
+    )
+
+10.	Вывести список фамилий студентов получивших 5 баллов по дифференциальным уравнениям.
+SELECT FIO
+FROM Student
+WHERE ID_St IN
+    (SELECT Id_St
+    FROM Exzamen
+    WHERE Predmet = 'Дифференциальные уравнения'
+    )
+
+11.	Напишите запрос, который покажет,  сколько экзаменов  сдавал Шутов.
+FROM Exzamen
+WHERE Id_St IN
+    (SELECT ID_St
+    FROM Student
+    WHERE FIO LIKE 'Шутов%'
+    )
+
+12.	Выведите название кафедры студентов, не сдавших хотя бы один экзамен.
+SELECT Kafedra
+FROM Kafedra
+WHERE Kafedra IN
+    (SELECT Kafedra
+    FROM G
+    WHERE [Group] IN
+        (SELECT [Group]
+        FROM Student
+        WHERE ID_St IN
+            (SELECT Id_St
+            FROM Exzamen
+            WHERE Ball IS NULL
+            )
+        )
+    )
+
+13.	Подсчитать количество кафедр на каждом факультете.
+SELECT Count(Kafedra), Decanat
+FROM Kafedra
+GROUP BY Decanat
+
+14.	Подсчитать количество пятерок на физико-математическом факультете.
+SELECT Count(Ball)
+FROM Exzamen
+WHERE Ball = 5 AND Id_St IN
+    (SELECT ID_St
+    FROM Student
+    WHERE [Group] IN
+        (SELECT [Group]
+        FROM G
+        WHERE Kafedra IN
+            (SELECT Kafedra
+            FROM Kafedra
+            WHERE Decanat = 'Физико-математический'
+            )
+        )
+    )
+
+15.	Определите номера зачетных книжек группы ФТ151
+SELECT N_Z
+FROM Zachetki
+WHERE Id_Studenta IN
+    (SELECT ID_St
+    FROM Student
+    WHERE [Group] = 'ФТ151'
+    )
+
+16.	Выведите перечень специальностей физико-математического факультета.
+SELECT DISTINCT Special
+FROM Student
+WHERE [Group] IN
+    (SELECT [Group]
+    FROM G
+    WHERE Kafedra IN
+        (SELECT Kafedra
+        FROM Kafedra
+        WHERE Decanat = 'Физико-математический'
+        )
+    )
+

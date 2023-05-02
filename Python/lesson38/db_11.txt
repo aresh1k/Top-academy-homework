@@ -1,0 +1,58 @@
+1. С помощью объединения вывести данные о каждом заказчике, для которого определен продавец.
+SELECT *
+FROM Klient
+WHERE EXISTS
+    (SELECT ID_Pr
+    FROM Prodaves
+    WHERE Name_Pr IS NOT NULL AND Klient.ID_Pr = Prodaves.ID_Pr)
+
+2. Вывести имя заказчика и данные о средней цене доставки для него. Если цена доставки больше средней по таблице написать - lot, меньше – few
+SELECT Klient.Name_KL, Zakaz.Cena_Dostavki,
+CASE WHEN Zakaz.Cena_Dostavki >= (SELECT AVG(Zakaz.Cena_Dostavki) FROM ZAKAZ) THEN 'lot' ELSE 'few' END
+FROM Klient, Zakaz
+WHERE Klient.ID_KL = Zakaz.ID_KL
+
+3. Соедините вместе все таблицы с помощью внешнего объединения.
+SELECT *
+FROM ZAKAZ z FULL OUTER JOIN Prodaves p, Klient k
+ON z.ID_Pr = p.ID_Pr AND z.ID_Pr = k.ID_Pr
+
+4. С помощью объединения вывести данные о скидках клиента для каждого продавца
+SELECT k.ID_Pr, k.Name_KL, k.Discoun
+FROM Klient k INNER JOIN Prodaves p
+ON k.ID_Pr = p.ID_Pr
+
+5. Напишите запрос, который выведет все города, в которых живут продавцы и заказчики.
+SELECT DISTINCT CITY_Z
+FROM Zakaz
+
+UNION
+
+SELECT DISTINCT City_Pr
+FROM Prodaves
+
+6. С помощью объединения вывести все данные о заказчиках и  заказах, даже если заказчик не сделал ни одного заказа за указанный период.
+SELECT *
+FROM Klient
+RIGHT JOIN Zakaz
+ON Klient.ID_KL = Zakaz.ID_KL
+
+7. Составьте запрос для вывода имен и кодов всех продавцов, в чьих городах есть покупатели, которых они не обслуживают. С помощью оператора в подзапросе.
+SELECT Prodaves.Name_Pr, Prodaves.ID_Pr
+FROM Prodaves
+WHERE Prodaves.ID_Pr NOT IN
+    (SELECT Klient.ID_Pr
+    FROM Klient
+    WHERE Prodaves.City_Pr = Klient.City_Kl
+    )
+
+8. Напишите запрос, который выведет все города и имена продавцов и заказчиков, которые живут в Лондоне.
+SELECT Prodaves.Name_Pr AS name
+FROM Prodaves
+WHERE Prodaves.City_Pr = 'London'
+
+UNION
+
+SELECT Klient.Name_KL AS name
+FROM Klient
+WHERE Klient.City_KL='London'
