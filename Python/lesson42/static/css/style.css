@@ -1,0 +1,78 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: rgb(255, 254, 224);
+}
+
+.menu{
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    background: rgb(0, 101, 153);
+    padding: 20px;
+    margin: 0;
+}
+.menu a{
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+}
+
+.content_title{
+    color: rgb(0, 101, 153);
+    text-align: center;
+    margin: 30px 0;
+    font-size: 60px;
+}
+
+.course_list{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.block{
+    min-width: 300px;
+    width: 30%;
+    background: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+}
+
+.block_title{
+    padding: 10px 0;
+    margin: 0;
+    background: rgb(0, 101, 153);
+    color: white;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.block_price{
+    font-size: 30px;
+    color: black;
+    padding: 0;
+    margin: 20px;
+}
+
+.block_text{
+    font-size: 16px;
+    margin: 0 10px;
+    padding: 0;
+    height: 100%;
+}
+
+.block_button{
+    padding: 10px 80px;
+    margin: 20px 10px;
+    background: rgb(0, 101, 153);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    border: 1px solid black;
+    align-self: center;
+}

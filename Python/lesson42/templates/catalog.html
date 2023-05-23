@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+<h1 class="content_title">Pricing</h1>
+<div class="course_list">
+    <div class="block">
+        <h2 class="block_title">Курс Python</h2>
+        <h3 class="block_price">14110 руб/мес</h3>
+        <p class="block_text">Учебная программа "Программирование на Python" создана для тех, кто хочет с нуля освоить 3й по популярность язык в мире и создавать на нем от простых приложений до высоконагруженых web-сервисов</p>
+        <button class="block_button">Купить</button>
+    </div>
+    <div class="block">
+        <h2 class="block_title">Разработка на Java</h2>
+        <h3 class="block_price">6070 руб/мес</h3>
+        <p class="block_text">Основам программировния на языке JAVA; Принципам объектно-ориентированного программирования; Понимать механизмы многопоточности Java; Уметь сериализовать и парсить данные используя JSON.</p>
+        <button class="block_button">Купить</button>
+    </div>
+    <div class="block">
+        <h2 class="block_title">Курс Front-end</h2>
+        <h3 class="block_price">7300 руб/мес</h3>
+        <p class="block_text">Введение в веб-технолоии. Структура HTML. Форматирование текста с помощью HTML. Управлять браузерами и элементами HTML-страниц с помощью JavaScript. Владеть фреймворками React и Angular</p>
+        <button class="block_button">Купить</button>
+    </div>
+</div>
+{% endblock %}

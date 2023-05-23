@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block title %}
+    <title>{{ title }}</title>
+    {% endblock %}
+</head>
+<body>
+    {% block content %}
+    <ul class="menu">
+          {% for m in menu %}
+          <li><a href="{{ m.url }}">{{ m.name }}</a></li>
+          {% endfor %}
+    </ul>
+    {% endblock content %}
+</body>
+</html>
