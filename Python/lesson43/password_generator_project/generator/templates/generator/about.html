@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="container">
+    <h1>Как пользоваться генератором паролей</h1>
+    <p id="about">Для генерации пароля выберите на главной странице количество символов и проставьте галочки рядом с необходимыми символами в пароле</p>
+    <h3>Автор: Abc Defghjk Lmnopqstq</h3>
+    <a href="{% url 'home' %}">Вернуться на главную</a>
+</div>
+</body>
+</html>
