@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h2>Портфолио автора Chengwei Pan</h2>
+    <div id="author"><a href="https://www.artstation.com/pan" target="_blank"><img src="{% static 'arts/artstation-logo-horizontal-dark.png' %}" alt=""></a></div>
+
+    <h2>Примеры работ</h2>
+    <div class="block">
+        {% for art in arts %}
+            <div class="element">
+                <div>
+                    <img src="{{ art.image.url }}" alt="">
+                </div>
+                <div class="text">
+                    <h2><a href="{{ art.url }}" target="_blank">{{ art.title }}</a></h2>
+                    <p>{{ art.description }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
