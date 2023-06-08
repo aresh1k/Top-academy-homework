@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'arts/borderlands.png' %}">
+</head>
+<body>
+    <div class="menu">
+        <div class="wrap">
+            <div class="logo">
+                <a href="{% url 'main' %}"><img src="{% static 'arts/logo.png' %}" alt=""></a>
+            </div>
+            <ul>
+                <li><a href="{% url 'main' %}">Главная</a></li>
+                <li><a href="{% url 'authors' %}">Другие авторы</a></li>
+            </ul>
+        </div>
+    </div>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
