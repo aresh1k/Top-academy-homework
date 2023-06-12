@@ -1,0 +1,14 @@
+{% extends 'arts/base.html' %}
+
+{% block content %}
+
+<h2>Другие авторы</h2>
+
+{% for author in authors %}
+<div class="authors">
+    <h2><a href="{{ author.url }}" target="_blank">{{ author.name }}</a></h2>
+    <h5>{{ author.description }}</h5>
+</div>
+{% endfor %}
+
+{% endblock %}
