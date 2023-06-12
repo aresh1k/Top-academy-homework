@@ -1,0 +1,11 @@
+{% extends 'arts/base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    <h2>Проверка авторизации пользователя успешно пройдена.</h2>
+{% else %}
+    <h2><a href="{% url 'login' %}">Авторизуйтесь</a> для просмотра этой страницы</h2>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'arts/base.html' %}
+
+{% block content %}
+
+<h1>Регистрация:</h1>
+<form method="post" class="register_form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="register_btn">
+        <button class="register_button">Зарегистрироваться</button>
+    </div>
+</form>
+
+{% endblock %}

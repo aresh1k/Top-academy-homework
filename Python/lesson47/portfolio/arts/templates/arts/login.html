@@ -1,0 +1,17 @@
+{% extends 'arts/base.html' %}
+
+{% block content %}
+
+<h1>Авторизация:</h1>
+
+<div>{{ error }}</div>
+
+<form method="post" class="login_form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="auth_block">
+        <button class="auth_button">Войти</button>
+    </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'arts/borderlands.png' %}">
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <div class="menu">
+            <div class="wrap">
+                <div class="logo">
+                    <a href="{% url 'main' %}"><img src="{% static 'arts/logo.png' %}" alt=""></a>
+                </div>
+                <ul>
+                    <li>Текущий пользователь: {{ user.username }}</li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button class="logout_button">Выйти</button>
+                        </form>
+                    </li>
+                    <li><a href="{% url 'main' %}">Главная</a></li>
+                    <li><a href="{% url 'authors' %}">Другие авторы</a></li>
+                </ul>
+            </div>
+        </div>
+    {% else %}
+        <div class="menu">
+            <div class="wrap">
+                <div class="logo">
+                    <a href="{% url 'main' %}"><img src="{% static 'arts/logo.png' %}" alt=""></a>
+                </div>
+                <ul>
+                    <li><a href="{% url 'register' %}">Зарегистрироваться</a></li>
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'main' %}">Главная</a></li>
+                    <li><a href="{% url 'authors' %}">Другие авторы</a></li>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
